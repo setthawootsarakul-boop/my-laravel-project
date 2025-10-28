@@ -1,0 +1,275 @@
+/* 🌅 Hero Header */
+.hero-header {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    height: 85vh;
+    background: url('/images/hero-bg.jpg') center center / cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+.hero-header .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 1;
+}
+.hero-header .content {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+    max-width: 800px;
+    padding: 20px;
+    animation: fadeInUp 1.2s ease forwards;
+}
+.hero-header .btn-warning {
+    font-weight: 600;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+.hero-header .btn-warning:hover {
+    background-color: #ffcc33;
+    color: #000;
+    transform: scale(1.07);
+}
+
+/* 🔹 Fade In Animation */
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 🎠 Carousel */
+.carousel {
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: -40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+.carousel-img {
+    height: 480px;
+    object-fit: cover;
+}
+
+/* 🍗 OUR MENU SPECIALS (แสดงแค่ 2 รายการ ไม่เลื่อนแนวนอน) */
+.popular-section {
+    padding: 80px 0;
+    background: linear-gradient(to bottom, #fff9f3, #ffffff);
+}
+.popular-section h3 {
+    font-weight: 700;
+    color: #222;
+    margin-bottom: 40px;
+}
+.popular-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.menu-box {
+    background: #fff;
+    border-radius: 20px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    text-align: center;
+    border: 1px solid #f3f3f3;
+    width: 320px;
+}
+.menu-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+}
+.menu-img {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+.menu-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+.menu-box:hover .menu-img img {
+    transform: scale(1.05);
+}
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff4040;
+    color: #fff;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border-radius: 8px;
+}
+.menu-content {
+    padding: 20px;
+}
+.menu-content h5 {
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #222;
+}
+.menu-content p {
+    font-size: 0.9rem;
+    color: #777;
+    margin: 10px 0;
+    line-height: 1.4;
+}
+.menu-content .price {
+    font-weight: 700;
+    color: #ff7b00;
+    font-size: 1.1rem;
+}
+
+/* 🍽️ OUR MENU */
+.menu-card {
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+.menu-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+/* 💬 Reviews */
+.review-slider {
+    display: flex;
+    gap: 2rem;
+    animation: slideLeft 18s linear infinite;
+    width: max-content;
+}
+.review-card {
+    width: 260px;
+    flex-shrink: 0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.review-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+@keyframes slideLeft {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* 📱 Responsive */
+@media (max-width: 991px) {
+    .hero-header { height: 70vh; }
+    .carousel-img { height: 320px; }
+    .menu-box { width: 80%; }
+}
+@media (max-width: 575px) {
+    .hero-header { height: 60vh; }
+    .carousel-img { height: 250px; }
+    .menu-box { width: 100%; }
+}
+
+/* 🎨 Color palette */
+:root {
+    --primary-dark: #0d338c;   /* น้ำเงินเข้ม */
+    --accent: #fcbf49;         /* ทองอบอุ่น */
+    --light-bg: #f8f9ff;       /* ฟ้าอ่อนอมขาว */
+}
+
+/* 🍽️ Menu Header */
+.menu-header {
+    position: relative;
+    background: linear-gradient(135deg, var(--primary-dark), #1b4dcc);
+    color: #fff;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+.menu-header .overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.25);
+    z-index: 0;
+}
+.menu-header .container {
+    position: relative;
+    z-index: 1;
+}
+
+/* 🧊 Menu Card */
+.menu-item-card {
+    border-radius: 20px;
+    background: var(--light-bg);
+    box-shadow: 0 6px 20px rgba(13, 51, 140, 0.15);
+    transition: all 0.3s ease;
+}
+.menu-item-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(13, 51, 140, 0.25);
+}
+.menu-img-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+.menu-img-wrapper img {
+    height: 230px;
+    width: 100%;
+    object-fit: cover;
+    transition: transform .4s ease;
+}
+.menu-item-card:hover img {
+    transform: scale(1.08);
+}
+.menu-category {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* 🖋️ Text & Buttons */
+.text-primary-dark { color: var(--primary-dark) !important; }
+.text-accent { color: var(--accent) !important; }
+
+.btn-accent {
+    background-color: var(--accent);
+    border: none;
+    color: #000;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(252, 191, 73, 0.3);
+    transition: all 0.3s ease;
+}
+.btn-accent:hover {
+    background-color: #ffd66e;
+    transform: scale(1.07);
+    box-shadow: 0 6px 16px rgba(252, 191, 73, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .menu-header {
+        padding: 60px 0;
+    }
+    .menu-item-card img {
+        height: 200px;
+    }
+}
