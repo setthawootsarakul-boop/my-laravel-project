@@ -55,7 +55,7 @@
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 🎠 Carousel (ใหม่) */
+/* 🎠 Carousel */
 .carousel {
     position: relative;
     border-radius: 20px;
@@ -99,15 +99,9 @@
     transition: opacity 0.25s ease-in-out;
     opacity: 0.7;
 }
-.custom-carousel-btn:hover {
-    opacity: 1;
-}
-.carousel-control-prev {
-    left: 10px;
-}
-.carousel-control-next {
-    right: 10px;
-}
+.custom-carousel-btn:hover { opacity: 1; }
+.carousel-control-prev { left: 10px; }
+.carousel-control-next { right: 10px; }
 .carousel-arrow {
     font-size: 3rem;
     color: #fff;
@@ -130,7 +124,7 @@
     background-color: var(--accent);
 }
 
-/* 🍗 OUR MENU SPECIALS */
+/* 🍗 OUR MENU SPECIALS (Home) */
 .popular-section {
     padding: 100px 0;
     background: linear-gradient(180deg, #ffffff 0%, #f8f9ff 100%);
@@ -146,62 +140,86 @@
     flex-wrap: wrap;
     gap: 40px;
 }
-.menu-box {
+
+/* 🧊 Menu Card (ใช้ได้ทั้งหน้า Home + Menu) */
+.menu-card {
     background: #fff;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    border-radius: 20px;
+    box-shadow: 0 6px 18px rgba(13, 51, 140, 0.12);
     transition: all 0.3s ease;
-    width: 300px;
-}
-.menu-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.12);
-}
-.menu-img {
-    height: 220px;
     overflow: hidden;
-    position: relative;
 }
-.menu-img img {
+.menu-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 25px rgba(13, 51, 140, 0.25);
+}
+.menu-card-img {
+    position: relative;
+    width: 100%;
+    height: 230px;
+    overflow: hidden;
+}
+.menu-card-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.4s ease;
 }
-.menu-box:hover .menu-img img {
+.menu-card:hover .menu-card-img img {
     transform: scale(1.08);
 }
-.discount-badge {
+.menu-card-category {
     position: absolute;
     top: 12px;
-    right: 12px;
-    background: #ff4040;
-    color: #fff;
+    left: 12px;
+    background: var(--accent);
+    color: #000;
     font-weight: 600;
-    padding: 6px 12px;
-    border-radius: 8px;
     font-size: 0.85rem;
+    padding: 6px 12px;
+    border-radius: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
-.menu-content {
-    padding: 20px;
+.menu-card-body {
+    padding: 20px 15px 25px;
+    text-align: center;
 }
-.menu-content h5 {
-    color: var(--primary-dark);
+.menu-card-body h5 {
     font-weight: 700;
+    color: var(--primary-dark);
 }
-.menu-content p {
+.menu-card-body p {
     color: var(--text-light);
     font-size: 0.9rem;
-    margin: 10px 0;
 }
-.menu-content .price {
-    font-weight: 800;
+.menu-card-body .text-accent {
     color: var(--accent);
-    font-size: 1.1rem;
 }
 
-/* 🍽️ OUR MENU */
+/* 🍽️ MENU PAGE HEADER */
+.menu-header {
+    position: relative;
+    background: url('/images/hero.jpg') center/cover no-repeat;
+    min-height: 45vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0 0 40px 40px;
+    overflow: hidden;
+}
+.menu-header .menu-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(13, 51, 140, 0.55);
+}
+.menu-header h1, .menu-header p {
+    position: relative;
+    z-index: 2;
+    color: #fff;
+}
+
+/* 🍽️ Category Buttons */
 .category-btn {
     border: 2px solid var(--primary-dark);
     background: #fff;
@@ -240,32 +258,6 @@
     border: 3px solid var(--accent);
 }
 
-/* 🧊 Menu Item Cards */
-.menu-item-card {
-    border-radius: 20px;
-    background: #fff;
-    box-shadow: 0 6px 18px rgba(13, 51, 140, 0.15);
-    transition: all 0.3s ease;
-}
-.menu-item-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 25px rgba(13, 51, 140, 0.25);
-}
-.menu-img-wrapper {
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    overflow: hidden;
-}
-.menu-img-wrapper img {
-    width: 100%;
-    height: 230px;
-    object-fit: cover;
-    transition: transform 0.4s ease;
-}
-.menu-item-card:hover img {
-    transform: scale(1.08);
-}
-
 /* 🖋️ Buttons */
 .btn-accent {
     background-color: var(--accent);
@@ -282,16 +274,101 @@
     box-shadow: 0 6px 14px rgba(252, 191, 73, 0.35);
 }
 
+/* 🌿 About Page */
+.about-section {
+    background-color: #fffdf9;
+    border-radius: 16px;
+    padding: 60px 0;
+}
+.about-section h2 {
+    font-size: 2rem;
+    color: var(--primary-dark);
+}
+.about-section p.lead {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+.about-section .about-img {
+    max-width: 85%;
+    border-radius: 20px;
+    transition: transform 0.4s ease, box-shadow 0.3s ease;
+}
+.about-section .about-img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* 🌐 Navbar Styling */
+.navbar {
+    transition: all 0.3s ease;
+}
+.navbar-brand {
+    color: var(--primary-dark) !important;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+}
+.nav-link {
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: all 0.2s ease;
+    position: relative;
+}
+.nav-link:hover {
+    color: var(--primary-dark);
+}
+.nav-link.active {
+    color: var(--primary-dark) !important;
+}
+.nav-link.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 20%;
+    width: 60%;
+    height: 2px;
+    background-color: var(--accent);
+    border-radius: 2px;
+}
+
 /* 📱 Responsive */
 @media (max-width: 991px) {
     .hero-header { height: 70vh; }
     .carousel-img { height: 350px; }
-    .menu-box { width: 90%; }
 }
 @media (max-width: 575px) {
     .hero-header { height: 60vh; }
     .carousel-img { height: 260px; }
-    .menu-box { width: 100%; }
     .hero-header h1 { font-size: 2rem; }
     .carousel-arrow { font-size: 2.4rem; }
+    .menu-header h1 { font-size: 1.8rem; }
+    .menu-header p { font-size: 1rem; }
+}
+
+/* 🌙 Footer */
+.footer {
+    background-color: var(--primary-dark);
+}
+
+.footer .text-accent {
+    color: var(--accent) !important;
+}
+
+.footer-link {
+    color: #ddd;
+    text-decoration: none;
+    display: block;
+    margin: 6px 0;
+    transition: all 0.2s ease;
+}
+.footer-link:hover {
+    color: var(--accent);
+    transform: translateX(4px);
+}
+
+.social-icons a {
+    transition: all 0.3s ease;
+}
+.social-icons a:hover {
+    color: var(--accent) !important;
+    transform: translateY(-3px);
 }

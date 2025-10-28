@@ -4,6 +4,9 @@
     @include('layouts.head')
 </head>
 <body>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
     {{-- 🌐 Navbar --}}
     @include('layouts.nav')
 
@@ -12,7 +15,6 @@
         <div class="container">
             @yield('content')
         </div>
-    </main>
 
     {{-- ⚓ Footer --}}
     @include('layouts.footer')

@@ -1,27 +1,31 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-    <a class="navbar-brand" href="{{ route('home') }}">FryGrill</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand fw-bold text-primary-dark fs-4" href="{{ route('home') }}">
+            🍗 FryGrill
+        </a>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item {{ request()->routeIs('home') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('home') }}">Home</a>
-            </li>
-            <li class="nav-item {{ request()->routeIs('about') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('about') }}">About</a>
-            </li>
-            <li class="nav-item {{ request()->routeIs('menu') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('menu') }}">Menu</a>
-            </li>
-            <li class="nav-item {{ request()->routeIs('reviews') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('reviews') }}">Reviews</a>
-            </li>
-        </ul>
+        <!-- Toggle -->
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menu -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto align-items-lg-center">
+                <li class="nav-item mx-2">
+                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" href="{{ route('home') }}">Home</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link {{ request()->routeIs('about') ? 'active' : '' }}" href="{{ route('about') }}">About</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link {{ request()->routeIs('menu') ? 'active' : '' }}" href="{{ route('menu') }}">Menu</a>
+                </li>
+                <li class="nav-item mx-2">
+                    <a class="nav-link {{ request()->routeIs('reviews') ? 'active' : '' }}" href="{{ route('reviews') }}">Reviews</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
-<!-- Bootstrap 4 JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js "></script>     
