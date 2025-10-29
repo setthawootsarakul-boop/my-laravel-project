@@ -9,7 +9,7 @@ use App\Models\Inventory;
 
 class CartController extends Controller
 {
-    // แสดงตะกร้าสินค้า
+    // 🛒 แสดงตะกร้าสินค้า
     public function index()
     {
         $cartItems = CartItem::with('menuItem')->get();
@@ -37,34 +37,69 @@ class CartController extends Controller
         $cart->quantity = $cart->exists ? $cart->quantity + 1 : 1;
         $cart->save();
 
-        // ลดจำนวนในสต็อก
+        // ลดจำนวนสต็อก
         $stock->decrement('quantity');
 
-        // ✅ นับจำนวนรวมในตะกร้า
+        // อัปเดต session ให้ badge ตะกร้า
         $cartCount = CartItem::sum('quantity');
         session(['cart_count' => $cartCount]);
 
         return response()->json([
             'success' => true,
-            'message' => '✅ เพิ่มสินค้าลงตะกร้าแล้ว',
-            'cart_count' => $cartCount
+            'cart_count' => $cartCount,
+            'message' => '✅ เพิ่มสินค้าลงตะกร้าแล้ว'
         ]);
     }
 
-    // ลบสินค้าออกจากตะกร้า
+    // ✅ เพิ่ม / ลด จำนวนสินค้าในตะกร้า
+    public function updateQuantity(Request $request, $id)
+    {
+        $item = CartItem::find($id);
+        if (!$item) {
+            return response()->json(['success' => false]);
+        }
+
+        $inventory = Inventory::where('menu_item_id', $item->menu_item_id)->first();
+
+        if ($request->action === 'increase') {
+            // เช็คว่ายังมีของใน stock มั้ย
+            if ($inventory && $inventory->quantity > 0) {
+                $item->quantity++;
+                $item->save();
+                $inventory->decrement('quantity');
+            } else {
+                return response()->json(['success' => false, 'message' => '❌ สินค้าหมดสต็อก']);
+            }
+        }
+
+        if ($request->action === 'decrease' && $item->quantity > 1) {
+            $item->quantity--;
+            $item->save();
+            $inventory->increment('quantity');
+        }
+
+        // อัปเดตจำนวนรวมใน session
+        session(['cart_count' => CartItem::sum('quantity')]);
+
+        return response()->json(['success' => true]);
+    }
+
     public function remove($id)
     {
-        $cartItem = CartItem::findOrFail($id);
-        $inventory = Inventory::where('menu_item_id', $cartItem->menu_item_id)->first();
+        $cartItem = CartItem::find($id);
+        if (!$cartItem) {
+            return response()->json(['success' => false]);
+        }
 
+        $inventory = Inventory::where('menu_item_id', $cartItem->menu_item_id)->first();
         if ($inventory) {
             $inventory->increment('quantity', $cartItem->quantity);
         }
 
         $cartItem->delete();
-
         session(['cart_count' => CartItem::sum('quantity')]);
 
-        return redirect()->route('cart.index')->with('success', '🗑️ ลบสินค้าออกจากตะกร้าแล้ว');
+        return response()->json(['success' => true]);
     }
+
 }

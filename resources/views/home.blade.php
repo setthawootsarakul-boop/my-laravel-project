@@ -106,7 +106,7 @@
         <div class="review-slider d-flex justify-content-center flex-wrap gap-3">
             @foreach($reviews as $rev)
                 <div class="review-card text-center p-4 bg-light shadow-sm rounded" style="width:250px;">
-                    <img src="{{ asset('images/customers/' . ($rev->photo ?? '  ')) }}"
+                    <img src="{{ asset('images/customers/customer.jpg') }}"
                          class="rounded-circle mb-3 shadow" width="100" height="100" alt="customer">
                     <h5 class="fw-semibold text-primary-dark">{{ $rev->customer_name ?? 'Anonymous' }}</h5>
                     <p class="text-muted small mb-2">"{{ Str::limit($rev->comment ?? '', 100) }}"</p>
