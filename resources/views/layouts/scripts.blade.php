@@ -28,6 +28,5 @@ $.ajaxSetup({
 <!-- ✅ SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="{{ asset('js/slider.js') }}"></script>
-<script src="{{ asset('js/cart.js') }}"></script>
 
 @stack('scripts')
