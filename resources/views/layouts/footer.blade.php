@@ -9,11 +9,10 @@
                     วัตถุดิบสดใหม่ทุกวันเพื่อคุณ 💛
                 </p>
                 <div class="social-icons d-flex gap-3">
-                    <!-- ใช้ Bootstrap Icons -->
-                    <a href="#" class="text-white fs-4"><i class="bi bi-facebook"></i></a>
-                    <a href="#" class="text-white fs-4"><i class="bi bi-line"></i></a>
-                    <a href="#" class="text-white fs-4"><i class="bi bi-twitter-x"></i></a>
-                    <a href="mailto:info@frygrill.com" class="text-white fs-4"><i class="bi bi-envelope"></i></a>
+                    <a href="#" class="text-white fs-4 social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="#" class="text-white fs-4 social-link"><i class="bi bi-line"></i></a>
+                    <a href="#" class="text-white fs-4 social-link"><i class="bi bi-twitter-x"></i></a>
+                    <a href="mailto:info@frygrill.com" class="text-white fs-4 social-link"><i class="bi bi-envelope"></i></a>
                 </div>
             </div>
 

@@ -38,11 +38,9 @@
             <button class="carousel-control-next custom-carousel-btn" type="button" data-bs-target="#homeCarousel" data-bs-slide="next">
                 <span class="carousel-arrow">❯</span>
             </button>
-
         </div>
     </div>
 </section>
-
 
 <!-- 🍗 OUR MENU SPECIALS -->
 <section class="popular-section text-center">
@@ -94,8 +92,9 @@
             @include('partials.menu_cards', ['menu' => $menu])
         </div>
 
-        <a href="{{ route('menu') }}" class="btn btn-primary-dark btn-lg px-5 mt-5 text-white">
-            ดูเพิ่มเติม
+        <!-- ✨ ปุ่มดูเพิ่มเติม -->
+        <a href="{{ route('menu') }}" class="btn btn-gradient btn-lg px-5 mt-5 shadow">
+            🍽️ ดูเมนูเพิ่มเติม
         </a>
     </div>
 </section>
@@ -120,7 +119,7 @@
 
 @push('scripts')
 <script>
-// ✅ Bootstrap Carousel (บังคับเริ่ม)
+// ✅ Bootstrap Carousel
 document.addEventListener('DOMContentLoaded', function () {
     const carouselEl = document.getElementById('homeCarousel');
     if (carouselEl) {

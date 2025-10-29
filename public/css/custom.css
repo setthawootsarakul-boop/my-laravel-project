@@ -344,31 +344,85 @@
     .menu-header p { font-size: 1rem; }
 }
 
-/* 🌙 Footer */
+/* 🌑 FOOTER STYLING */
 .footer {
-    background-color: var(--primary-dark);
+    background: #0d1b3b;
+    color: #f8f9fa;
+    font-size: 0.95rem;
+    line-height: 1.6;
 }
 
 .footer .text-accent {
-    color: var(--accent) !important;
+    color: #ffd76a !important;
 }
 
 .footer-link {
+    display: inline-block;
     color: #ddd;
     text-decoration: none;
-    display: block;
-    margin: 6px 0;
-    transition: all 0.2s ease;
-}
-.footer-link:hover {
-    color: var(--accent);
-    transform: translateX(4px);
-}
-
-.social-icons a {
+    margin-bottom: 8px;
     transition: all 0.3s ease;
 }
-.social-icons a:hover {
-    color: var(--accent) !important;
+
+.footer-link:hover {
+    color: #ffd76a;
+    padding-left: 5px;
+}
+
+/* 🌟 Social Icons */
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: rgba(255, 215, 106, 0.15);
+    color: #ffd76a !important;
     transform: translateY(-3px);
 }
+
+/* ปุ่มดูเพิ่มเติม (หน้า Home) */
+.btn-more {
+    background-color: #0d338c;
+    color: #fff !important;
+    border: none;
+    border-radius: 40px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 12px 36px;
+    box-shadow: 0 6px 16px rgba(13, 51, 140, 0.25);
+    transition: all 0.3s ease;
+}
+
+.btn-more:hover {
+    background-color: #1a47c7;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(13, 51, 140, 0.35);
+}
+
+/* ระยะห่างด้านล่างให้ไม่ติดกับ Section ถัดไป */
+section + section {
+    margin-top: 60px;
+}
+
+/* 🌈 Gradient Button for “ดูเพิ่มเติม” */
+.btn-gradient {
+    background: linear-gradient(45deg, var(--primary-dark), var(--accent));
+    color: #fff !important;
+    border: none;
+    border-radius: 40px;
+    padding: 12px 40px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+.btn-gradient:hover {
+    background: linear-gradient(45deg, #09245f, #ffd76a);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(13,51,140,0.3);
+}
+
