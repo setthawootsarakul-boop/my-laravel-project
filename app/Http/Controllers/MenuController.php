@@ -14,4 +14,11 @@ class MenuController extends Controller
 
         return view('menu', compact('menu'));
     }
+    
+    public function show($id)
+    {
+        $item = \App\Models\MenuItem::findOrFail($id);
+        return response()->json($item);
+    }
+    
 }
