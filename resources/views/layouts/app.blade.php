@@ -1,13 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
 <head>
+    {{-- 🧩 รวมส่วน head --}}
     @include('layouts.head')
 </head>
 <body>
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
-
     {{-- 🌐 Navbar --}}
     @include('layouts.nav')
 
@@ -16,6 +13,7 @@
         <div class="container">
             @yield('content')
         </div>
+    </main>
 
     {{-- ⚓ Footer --}}
     @include('layouts.footer')
@@ -23,7 +21,7 @@
     {{-- 🧩 Global Scripts --}}
     @include('layouts.scripts')
 
-    {{-- 🧠 Page-Specific Scripts (เช่น AJAX Filter, JS พิเศษของหน้า Home) --}}
+    {{-- 🧠 Page-Specific Scripts --}}
     @stack('scripts')
 </body>
 </html>
