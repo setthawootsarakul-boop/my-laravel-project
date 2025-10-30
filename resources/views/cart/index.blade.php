@@ -85,9 +85,9 @@
                     ➕ เพิ่มเมนู
                 </a>
                 <a href="{{ route('home') }}" class="btn btn-outline-secondary rounded-pill px-4 me-2">
-                    ❌ ยกเลิก
+                    ← กลับหน้าแรก
                 </a>
-                <button class="btn btn-accent rounded-pill px-4">
+                <button id="checkout-btn" class="btn btn-accent rounded-pill px-4">
                     ✅ ดำเนินการสั่งซื้อ
                 </button>
             </div>
@@ -101,15 +101,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 $(function() {
-
-    // ลบ event เก่าทิ้งก่อน กันซ้ำ
+    // 🧹 ป้องกัน event ซ้ำ
     $(document).off('click', '.increase-qty');
     $(document).off('click', '.decrease-qty');
+    $(document).off('click', '#checkout-btn');
 
-    // ➕ เพิ่มสินค้า
+    // ✅ เพิ่มสินค้า
     $(document).on('click', '.increase-qty', function() {
-        const id = $(this).data('id');
-        updateQuantity(id, 'increase');
+        updateQuantity($(this).data('id'), 'increase');
     });
 
     // ➖ ลดสินค้า
@@ -129,59 +128,99 @@ $(function() {
                 confirmButtonText: 'ลบเลย',
                 cancelButtonText: 'ยกเลิก'
             }).then((result) => {
-                if (result.isConfirmed) {
-                    removeItem(id);
-                }
+                if (result.isConfirmed) removeItem(id);
             });
         } else {
             updateQuantity(id, 'decrease');
         }
     });
 
-    // ✅ ฟังก์ชันอัปเดตจำนวน
+    // ✅ ดำเนินการสั่งซื้อ
+    $(document).on('click', '#checkout-btn', function() {
+        Swal.fire({
+            title: '🧾 ยืนยันการสั่งซื้อ',
+            html: `
+                <input id="name" class="swal2-input" placeholder="ชื่อผู้รับ">
+                <input id="phone" class="swal2-input" placeholder="เบอร์โทรศัพท์">
+                <textarea id="address" class="swal2-textarea" placeholder="ที่อยู่จัดส่ง"></textarea>
+            `,
+            confirmButtonText: 'ยืนยันสั่งซื้อ ✅',
+            cancelButtonText: 'ยกเลิก',
+            showCancelButton: true,
+            focusConfirm: false,
+            preConfirm: () => {
+                const name = $('#name').val().trim();
+                const phone = $('#phone').val().trim();
+                const address = $('#address').val().trim();
+
+                if (!name || !phone || !address) {
+                    Swal.showValidationMessage('⚠️ กรุณากรอกข้อมูลให้ครบถ้วน');
+                    return false;
+                }
+                return { name, phone, address };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const data = result.value;
+                $.ajax({
+                    url: "{{ url('/order/checkout') }}",
+                    type: "POST",
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        name: data.name,
+                        phone: data.phone,
+                        address: data.address
+                    },
+                    success: (res) => {
+                        console.log(res);
+                        Swal.fire({
+                            icon: 'success',
+                            title: '🎉 สั่งซื้อสำเร็จ!',
+                            text: 'ขอบคุณที่สั่งซื้อกับเรา ❤️',
+                            confirmButtonText: 'กลับหน้าแรก'
+                        }).then(() => {
+                            window.location.href = "{{ route('home') }}";
+                        });
+                    },
+                    error: function (xhr, ajaxOptions, thrownError)  {
+                        alert(xhr.status);
+                        alert(thrownError);
+                        Swal.fire('ผิดพลาด', 'ไม่สามารถดำเนินการสั่งซื้อได้', 'error');
+                    }
+                });
+            }
+        });
+    });
+
+    // ฟังก์ชันอัปเดตจำนวนสินค้า
     function updateQuantity(id, action) {
         $.ajax({
             url: "{{ url('/cart/update') }}/" + id,
             type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}',
-                action: action
+            data: { _token: '{{ csrf_token() }}', action },
+            success: (res) => {
+                if (res.success) location.reload();
+                else Swal.fire('ผิดพลาด', res.message || 'อัปเดตจำนวนไม่สำเร็จ', 'error');
             },
-            success: function(res) {
-                if (res.success) {
-                    location.reload();
-                } else {
-                    Swal.fire('ผิดพลาด', res.message || 'ไม่สามารถอัปเดตจำนวนได้', 'error');
-                }
-            },
-            error: function() {
-                Swal.fire('ผิดพลาด', 'เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', 'error');
-            }
+            error: () => Swal.fire('ผิดพลาด', 'เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', 'error')
         });
     }
 
-    // ✅ ฟังก์ชันลบสินค้า
+    // ฟังก์ชันลบสินค้า
     function removeItem(id) {
         $.ajax({
             url: "{{ url('/cart/remove') }}/" + id,
             type: 'POST',
-            data: {
-                _token: '{{ csrf_token() }}'
-            },
-            success: function(res) {
+            data: { _token: '{{ csrf_token() }}' },
+            success: (res) => {
                 if (res.success) {
                     Swal.fire('สำเร็จ', 'ลบสินค้าออกจากตะกร้าแล้ว', 'success');
                     setTimeout(() => location.reload(), 700);
-                } else {
-                    Swal.fire('ผิดพลาด', 'ไม่สามารถลบสินค้าได้', 'error');
-                }
+                } else Swal.fire('ผิดพลาด', 'ไม่สามารถลบสินค้าได้', 'error');
             },
-            error: function() {
-                Swal.fire('ผิดพลาด', 'เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', 'error');
-            }
+            error: () => Swal.fire('ผิดพลาด', 'เชื่อมต่อเซิร์ฟเวอร์ไม่สำเร็จ', 'error')
         });
     }
-
 });
 </script>
 @endpush
